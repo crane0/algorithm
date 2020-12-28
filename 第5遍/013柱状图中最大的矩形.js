@@ -6,7 +6,7 @@
  * @return {number}
  */
 var largestRectangleArea = function(heights) {
-  
+
 };
 
 console.log(largestRectangleArea([2,1,5,6,2,3]))

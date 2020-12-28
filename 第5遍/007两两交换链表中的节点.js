@@ -13,19 +13,5 @@
  * @return {ListNode}
  */
 var swapPairs = function(head) {
-  let hair = new ListNode()
-  hair.next = head
-  let temp = hair
 
-  while (temp.next !== null && temp.next.next !== null) {
-    let node1 = temp.next
-    let node2 = temp.next.next
-
-    node1.next = node2.next
-    temp.next = node2
-    node2.next = node1
-
-    temp = node1
-  }
-  return hair.next
 };
