@@ -21,8 +21,8 @@ var maxSlidingWindow = function(nums, k) {
   ret.push(base)
 
   for (let i = 1; i < nums.length - k + 1; i++) {
-    if (nums[i-1] !== base) {
-      if (nums[i+k-1] >= base) {
+    if (nums[i-1] !== base) { // 如果左边离开的不是最大值
+      if (nums[i+k-1] >= base) { // 就用右边新进来的和最大值比较
         base = nums[i+k-1]
       }
     } else {
