@@ -28,6 +28,6 @@ var mergeTwoLists = function(l1, l2) {
     prev = prev.next
   }
 
-  prev.next = l1 === null ? l2 : l1
+  prev.next = l1 !== null ? l1 : l2
   return hair.next
-};
+}
