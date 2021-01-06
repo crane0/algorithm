@@ -106,4 +106,5 @@ class BinaryHeap {
   }
 }
 
-getLeastNumbers([3,2,1,4], 2)
+// getLeastNumbers([3,2,1,4], 2)
+console.log(getLeastNumbers([0,0,1,2,4,2,2,3,1,4], 8))
