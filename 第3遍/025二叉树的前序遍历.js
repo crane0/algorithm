@@ -13,5 +13,15 @@
  * @return {number[]}
  */
 var preorderTraversal = function(root) {
+  if (root === null) return []
+  let list = []
+  preorder(root)
+  return list
 
+  function preorder(root) {
+    if (root === null) return
+    list.push(root.val)
+    preorder(root.left)
+    preorder(root.right)
+  }
 };
