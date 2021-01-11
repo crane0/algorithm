@@ -19,3 +19,18 @@ var maxDepth = function(root) {
   const right = maxDepth(root.right)
   return Math.max(left, right) + 1
 }
+
+var maxDepth = function(root) {
+  let depth = 0
+  recur(root, 0)
+  return depth
+
+  function recur(root, level) {
+    if (root === null) {
+      depth = Math.max(depth, level)
+      return
+    }
+    recur(root.left, level + 1)
+    recur(root.right, level + 1)
+  }
+}
