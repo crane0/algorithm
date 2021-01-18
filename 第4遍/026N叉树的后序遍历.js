@@ -14,5 +14,16 @@
  * @return {number[]}
  */
 var postorder = function(root) {
+  if (root === null) return []
+  let list = []
+  porder(root)
+  return list
 
+  function porder(root) {
+    if (root === null) return
+    for (const child of root.children) {
+      porder(child)
+    }
+    list.push(root.val)
+  }
 };

@@ -14,5 +14,17 @@
  * @return {number[]}
  */
 var preorder = function(root) {
+  if (root === null) return []
 
+  let list = []
+  porder(root)
+  return list
+
+  function porder(root) {
+    if (root === null) return
+    list.push(root.val)
+    for (const child of root.children) {
+      porder(child)
+    }
+  }
 };

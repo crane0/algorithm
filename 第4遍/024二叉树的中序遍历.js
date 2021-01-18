@@ -15,5 +15,16 @@
  * @return {number[]}
  */
 var inorderTraversal = function(root) {
+  if (root === null) return []
 
+  let list = []
+  inorder(root)
+  return list
+  
+  function inorder(root) {
+    if (root === null) return
+    inorder(root.left)
+    list.push(root.val)
+    inorder(root.right)
+  }
 };
