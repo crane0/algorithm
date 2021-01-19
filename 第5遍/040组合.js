@@ -3,6 +3,7 @@
 */
 
 /**
+ * 注意上界
  * @param {number} n
  * @param {number} k
  * @return {number[][]}

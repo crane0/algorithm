@@ -11,7 +11,7 @@
 
 /**
  * Encodes a tree to a single string.
- * 使用前序遍历，并且是BFS
+ * 使用层序遍历，不是前序！并且是BFS
  *
  * @param {TreeNode} root
  * @return {string}

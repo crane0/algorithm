@@ -14,5 +14,18 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-  
+  let pre = -Infinity
+  return isValid(root)
+
+  function isValid(root) {
+    if (root === null) return true
+    
+    if (!isValid(root.left)) return false
+
+    if (root.val <= pre) return false
+
+    pre = root.val
+    
+    return isValid(root.right)
+  }
 }

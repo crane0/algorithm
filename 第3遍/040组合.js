@@ -8,7 +8,26 @@
  * @return {number[][]}
  */
 var combine = function(n, k) {
+  if (n < k || k <= 0) return []
 
+  let ret = []
+  dfs([], 1, k)
+  return ret
+
+  function dfs(queue, begin, k) {
+    if (k === 0) {
+      ret.push([...queue])
+      return
+    }
+
+    if (begin > n - k + 1) {
+      return
+    }
+    dfs(queue, begin + 1, k)
+    queue.push(begin)
+    dfs(queue, begin + 1, k - 1)
+    queue.pop(begin)
+  }
 };
 
 /* 

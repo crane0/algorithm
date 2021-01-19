@@ -17,7 +17,21 @@
  * @return {string}
  */
 var serialize = function(root) {
+  if (root === null) return 'null'
+
+  let ret = ''
+  dfs(root)
+  return ret
   
+  function dfs(root) {
+    if (root === null) {
+      ret += 'null,'
+      return
+    }
+    ret += `${root.val},`
+    dfs(root.left)
+    dfs(root.right)
+  }
 };
 
 /**
@@ -29,7 +43,19 @@ var serialize = function(root) {
  * @return {TreeNode}
  */
 var deserialize = function(data) {
- 
+  if (data === 'null') return null
+  let list = data.split(','), index = 0
+  return dfs()
+
+  function dfs() {
+    const rootVal = list[index++]
+    if (rootVal === 'null') return null
+
+    const root = new TreeNode(rootVal)
+    root.left = dfs()
+    root.right = dfs()
+    return root
+  }
 };
 
 /**
