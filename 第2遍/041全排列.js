@@ -6,7 +6,29 @@
  * @return {number[][]}
  */
 var permute = function(nums) {
+  if (nums.length === 0) return []
 
+  let ret = [], queue = [], n = nums.length
+  let used = Array.from(n).fill(false)
+  dfs(0)
+  return ret
+
+  function dfs(begin) {
+    if (n === begin) {
+      ret.push([...queue])
+      return
+    }
+
+    for (let i = 0; i < n; i++) {
+      if (!used[i]) {
+        queue.push(nums[i])
+        used[i] = true
+        dfs(begin + 1)
+        queue.pop(nums[i])
+        used[i] = false
+      }
+    }
+  }
 };
 
 /* 
