@@ -13,8 +13,8 @@ var permute = function(nums) {
   dfs(0)
   return ret
 
-  function dfs(begin) {
-    if (n === begin) {
+  function dfs(level) {
+    if (n === level) {
       ret.push([...queue])
       return
     }
@@ -23,7 +23,7 @@ var permute = function(nums) {
       if (!used[i]) {
         queue.push(nums[i])
         used[i] = true
-        dfs(begin + 1)
+        dfs(level + 1)
         queue.pop(nums[i])
         used[i] = false
       }

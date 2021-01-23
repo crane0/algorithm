@@ -11,5 +11,5 @@
 var findLadders = function(beginWord, endWord, wordList) {
 }
 
-// console.log(findLadders('hit', 'cog', ["hot","dot","dog","lot","log","cog"]))
-console.log(findLadders('hot', 'dog', ["hot","dog","dot"]))
+console.log(findLadders('hit', 'cog', ["hot","dot","dog","lot","log","cog"]))
+// console.log(findLadders('hot', 'dog', ["hot","dog","dot"]))
