@@ -9,5 +9,7 @@ var majorityElement = function(nums) {
 
 };
 
+// 投票计数法
+
 console.log(majorityElement([3,2,3])) // 3
 console.log(majorityElement([2,2,1,1,1,2,2])) // 2

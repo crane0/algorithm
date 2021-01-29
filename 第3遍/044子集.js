@@ -3,19 +3,30 @@
 */
 /* 
   使用分治的思想
-  将 nums 数组当前 index 的内容分为填充，和不填充到 list 中的2种情况。
+  将 nums 数组当前 index(位置) 的内容分为填充，和不填充到 list 中的2种情况。
   list 就是要填充到 ans 中的元素。
-*/
-/* 
-  使用分治的思想
-  将当前位置分为填充，和不填充2种。
 */
 /**
  * @param {number[]} nums
  * @return {number[][]}
  */
 var subsets = function(nums) {
+  if (nums.length === 0) return []
 
+  let ret = [], queue = []
+  dfs(queue, 0)
+  return ret
+
+  function dfs(queue, level) {
+    if (level === nums.length) {
+      ret.push([...queue])
+      return
+    }
+    dfs(queue, level + 1)
+    queue.push(nums[level])
+    dfs(queue, level + 1)
+    queue.pop()
+  }
 }
 
 /* 

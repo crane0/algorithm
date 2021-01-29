@@ -13,5 +13,18 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
+  if (root === null) return []
 
+  let queue = [root], ret = []
+  while (queue.length) {
+    let n = queue.length, list = []
+    while (n-- > 0) {
+      const node = queue.shift()
+      list.push(node.val)
+      if (node.left !== null) queue.push(node.left)
+      if (node.right !== null) queue.push(node.right)
+    }
+    ret.push(list)
+  }
+  return ret
 }
