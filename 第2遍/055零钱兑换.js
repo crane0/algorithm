@@ -16,7 +16,27 @@
  * @return {number}
  */
 var coinChange = function(coins, amount) {
-  
+  if (amount === 0) return 0
+  coins = coins.sort((a, b) => b - a)
+  let ret = Infinity
+  dfs(amount, 0, 0)
+  return ret === Infinity ? -1 : ret
+
+  function dfs(amount, level, count) {
+    if (amount === 0) {
+      ret = Math.min(ret, count)
+      return
+    }
+
+    if (level === coins.length) {
+      return
+    }
+    
+    // 剪枝： i + count < ret 
+    for (let i = parseInt(amount / coins[level]); i >= 0 && i + count < ret; i--) {
+      dfs(amount - i * coins[level], level + 1, count + i)
+    }
+  }
 }
 
 // console.log(coinChange([1,2,5], 11))

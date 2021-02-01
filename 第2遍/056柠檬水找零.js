@@ -7,7 +7,37 @@
  * @return {boolean}
  */
 var lemonadeChange = function(bills) {
-  
+  if (bills[0] > 5) return false
+
+  let count5 = 0, count10 = 0
+  for (const b of bills) {
+    if (b === 5) {
+      count5++
+    } else if (b === 10) {
+      if (count5 < 1) {
+        return false
+      } else {
+        count10++
+        count5--
+      }
+    } else if (b === 20) {
+      if (count5 < 1) {
+        return false
+      } else {
+        if (count10 < 1) {
+          if (count5 < 3) {
+            return false
+          } else {
+            count5 -= 3
+          }
+        } else {
+          count10--
+          count5--
+        }
+      }
+    }
+  }
+  return true
 };
 
 console.log(lemonadeChange([10, 10]))

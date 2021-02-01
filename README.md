@@ -34,3 +34,13 @@ TOPK 的问题，在生成 map 后，可以用 Array.from(map).sort 直接排序
 - 清理当前层逻辑
 
 (32,40,41,42,44) 的求子集问题，都可以用 dfs 选择不选择，push 和 pop 的方式得到。
+
+4，dfs
+      
+55零钱兑换中，`dfs(amount - i * coins[level], level + 1, count + i)` 第一个参数，如果直接计算，就不用再回溯：
+``` js
+let temp = amount
+amount = amount - i * coins[level]
+dfs(amount, level + 1, count + i)
+amount = temp
+```
