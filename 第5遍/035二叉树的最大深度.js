@@ -15,3 +15,8 @@
 var maxDepth = function(root) {
   
 }
+
+// 更简洁的
+var maxDepth = function(root) {
+  
+}

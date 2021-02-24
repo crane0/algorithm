@@ -11,13 +11,26 @@
 
 /**
  * Encodes a tree to a single string.
- * 使用前序遍历，并且是BFS
+ * 使用 BFS 层序遍历
  *
  * @param {TreeNode} root
  * @return {string}
  */
 var serialize = function(root) {
-  
+  if (root === null) return 'null'
+
+  let queue = [root], str = ''
+  while (queue.length) {
+    const node = queue.shift()
+    if (node === null) {
+      str += 'null,'
+    } else {
+      str += `${node.val},`
+      queue.push(node.left)
+      queue.push(node.right)
+    }
+  }
+  return str
 };
 
 /**
@@ -27,7 +40,30 @@ var serialize = function(root) {
  * @return {TreeNode}
  */
 var deserialize = function(data) {
+  if (data === 'null') return null
   
+  let list = data.split(',')
+  let index = 0
+  const rootVal = list[index++]
+  let root = new TreeNode(rootVal)
+  let queue = [root]
+
+  while (index < list.length - 1) {
+    const node = queue.shift()
+
+    const leftVal = list[index++]
+    if (leftVal !== 'null') {
+      node.left = new TreeNode(leftVal)
+      queue.push(node.left)
+    }
+
+    const rightVal = list[index++]
+    if (rightVal !== 'null') {
+      node.right = new TreeNode(rightVal)
+      queue.push(node.right)
+    }
+  }
+  return root
 };
 
 /**
