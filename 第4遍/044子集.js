@@ -15,7 +15,21 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
+  let ret = [], queue = []
+  dfs(0)
+  return ret
+  
+  function dfs(level) {
+    if (level === nums.length) {
+      ret.push([...queue])
+      return
+    }
 
+    dfs(level + 1)
+    queue.push(nums[level])
+    dfs(level + 1)
+    queue.pop(nums[level])
+  }
 }
 
 /* 

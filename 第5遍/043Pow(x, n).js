@@ -7,5 +7,6 @@
  * @return {number}
  */
 var myPow = function(x, n) {
-  
+
 }
+console.log(myPow(2, 10))

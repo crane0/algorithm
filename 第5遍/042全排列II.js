@@ -4,6 +4,7 @@
   https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/
 */
 /**
+ * 前提要先排序
  * @param {number[]} nums
  * @return {number[][]}
  */
