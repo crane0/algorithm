@@ -13,5 +13,21 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-  
+  if (root === null) return []
+  let list = []
+
+  dfs(root, 0)
+  return list
+
+  function dfs(root, level) {
+    if (root === null) return
+
+    if (level < list.length) {
+      list[level].push(root.val)
+    } else {
+      list[level] = [root.val]
+    }
+    dfs(root.left, level + 1)
+    dfs(root.right, level + 1)
+  }  
 }
