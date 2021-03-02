@@ -7,7 +7,32 @@
  * @return {boolean}
  */
 var lemonadeChange = function(bills) {
-  
+  let m5 = 0, m10 = 0
+  for (const money of bills) {
+    if (money === 5) {
+      m5++
+    } else { // 不是 5 就是 10 或 20
+      if (m5 === 0) {
+        return false
+      }
+      if (money === 10) {
+        m10++
+        m5--
+      } else if (money === 20) {
+        if (m10 > 0) {
+          m10--
+          m5--
+        } else if (m10 === 0){
+          if (m5 < 3) {
+            return false
+          } else {
+            m5 -= 3
+          }
+        }
+      }
+    }
+  }
+  return true
 };
 
 console.log(lemonadeChange([10, 10]))
