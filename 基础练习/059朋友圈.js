@@ -1,5 +1,5 @@
 /* 
-  https://leetcode-cn.com/problems/friend-circles/
+  https://leetcode-cn.com/problems/number-of-provinces/
 */
 /**
  * @param {number[][]} M
@@ -57,10 +57,16 @@ var findCircleNum = function(M) {
     }
   }
 
-  // M.length 是学生的个数
+  /* 
+    注意题目的前提。
+    M.length 是顶点的个数，
+    如果 a[0][2] === 1，则 a[2][0] 也会等于 1，因为 x 和 y 相连 === y 和 x 相连
+    所以，a[0][1] 和 a[1][0] === 1 || a[1][2] 和 a[2][1] === 1 ，否则 a[0][2] 和 a[2][0] 不可能联通的,
+    所以，省份的个数不可能超过 M.length 
+  */
   let uf = new unionFind(M.length)
   for (let i = 0; i < M.length; i++) {
-    for (let j = 0; j < i; j++) { // 因为 M[1][0] 和 M[0][1] 是一个意思
+    for (let j = 0; j < i; j++) { // 题目要求了 isConnected[i][j] == isConnected[j][i]
       if(M[i][j] === 1) {
         uf.union(i, j)
       }

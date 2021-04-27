@@ -44,4 +44,6 @@ for (const word of words) {
   trie.insert(word)
 }
 
+console.log(JSON.stringify(trie))
+
 console.log(trie.startsWith("eat"))
