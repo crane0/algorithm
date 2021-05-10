@@ -1,5 +1,6 @@
 /* 
   https://leetcode-cn.com/problems/friend-circles/
+  https://leetcode-cn.com/problems/number-of-provinces/
 */
 /**
  * @param {number[][]} M
