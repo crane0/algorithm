@@ -9,8 +9,58 @@
  * @return {number}
  */
 var slidingPuzzle = function(board) {
-  
+  const map = new Map()
+  map.set(0, [1, 3])
+  map.set(1, [0, 2, 4])
+  map.set(2, [1, 5])
+  map.set(3, [0, 4])
+  map.set(4, [1, 3, 5])
+  map.set(5, [2, 4])
+
+  function getIndex(i, j) {
+    return i * 3 + j
+  }
+
+  let start = []
+  const end = '123450'
+  let set = new Set()
+  set.add(end)
+
+  let zeroIndex = 0
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 3; j++) {
+      start.push(board[i][j])
+      if (board[i][j] === 0) {
+        zeroIndex = getIndex(i, j)
+      }
+    }
+  }
+
+  if (start.join('') === end) return 0
+
+  let queue = [[zeroIndex, start]], count = 0
+  while (queue.length > 0) {
+    let length = queue.length
+    while (length-- > 0) {
+      const [index, start] = queue.shift()
+      for (const nextIndex of map.get(index)) {
+        let temp = start.slice(0)
+        temp[index] = temp[nextIndex]
+        temp[nextIndex] = 0
+        const arr2Str = temp.join('')
+        if (arr2Str === end) {
+          return count + 1
+        }
+        if (!set.has(arr2Str)) {
+          set.add(arr2Str)
+          queue.push([nextIndex, temp])
+        }
+      }
+    }
+    count++
+  }
+  return -1
 };
 
-// console.log(slidingPuzzle([[4,1,2],[5,0,3]]))
+console.log(slidingPuzzle([[4,1,2],[5,0,3]]))
 console.log(slidingPuzzle([[1,2,3],[5,4,0]]))

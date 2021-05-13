@@ -15,7 +15,40 @@
  * @return {number}
  */
 var ladderLength = function(beginWord, endWord, wordList) {
- 
+  const wordSet = new Set(wordList)
+  if (!wordSet.has(endWord)) return 0
+
+  const dict = []
+  for (let i = 97; i < 123; i++) {
+    dict.push(String.fromCharCode(i))
+  }
+
+  let beginSet = new Set([beginWord])
+  let endSet = new Set([endWord])
+  let count = 1
+
+  while (beginSet.size > 0) {
+    let newSet = new Set()
+    for (let begin of beginSet) {
+      for (let i = 0; i < begin.length; i++) {
+        for (const letter of dict) {
+          const nextWord = begin.slice(0, i) + letter + begin.slice(i+1)
+          if (endSet.has(nextWord)) return count + 1
+
+          if (wordSet.has(nextWord)) {
+            wordSet.delete(nextWord)
+            newSet.add(nextWord)
+          }
+        }
+      }
+    }
+    count++
+    beginSet = newSet
+    if (beginSet.size > endSet.size) {
+      [beginSet, endSet] = [endSet, beginSet]
+    }
+  }
+  return 0
 }
 
 

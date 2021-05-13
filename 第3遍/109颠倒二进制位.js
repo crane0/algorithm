@@ -8,7 +8,12 @@
  * @return {number} - a positive integer
  */
 var reverseBits = function(n) {
-  
+  let num = 32, count = 0
+  while (num-- > 0) {
+    count = (count << 1) + (n & 1)
+    n >>= 1
+  }
+  return count >>> 0
 }
 
 /**
@@ -18,14 +23,5 @@ var reverseBits = function(n) {
  * @return {number} - a positive integer
  */
 var reverseBits = function(n) {
-}
-
-
-/**
- * 超时
- * @param {number} n - a positive integer
- * @return {number} - a positive integer
- */
- var reverseBits = function(n) {
-  
+  return parseInt(n.toString(2).split('').reverse().join('').padEnd(32, 0), 2)
 }

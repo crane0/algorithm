@@ -6,6 +6,11 @@
  * @param {number} n - a positive integer
  * @return {number}
  */
- var hammingWeight = function(n) {
-   
- }
+var hammingWeight = function(n) {
+  let num = 32, count = 0
+  while (num-- > 0) {
+    count += n & 1
+    n >>= 1
+  }
+  return count
+}
