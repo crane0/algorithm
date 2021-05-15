@@ -19,14 +19,14 @@ var levelOrder = function(root) {
   let queue = [root], list = []
   while (queue.length > 0) {
     let length = queue.length
-    let tempList = []
+    let temp = []
     while (length-- > 0) {
       const node = queue.shift()
-      tempList.push(node.val)
-      if (node.left !== null) queue.push(node.left)
-      if (node.right !== null) queue.push(node.right)
+      temp.push(node.val)
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
     }
-    list.push(tempList)
+    list.push(temp)
   }
   return list
 }
@@ -36,11 +36,10 @@ var levelOrder = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
- var levelOrder = function(root) {
+var levelOrder = function(root) {
   if (root === null) return []
-
   let list = []
-  dfs(0 ,root)
+  dfs(0, root)
   return list
 
   function dfs(level, node) {
@@ -49,7 +48,7 @@ var levelOrder = function(root) {
     } else {
       list[level].push(node.val)
     }
-    if (node.left !== null) dfs(level + 1, node.left)
-    if (node.right !== null) dfs(level + 1, node.right)
+    if (node.left) dfs(level + 1, node.left)
+    if (node.right) dfs(level + 1, node.right)
   }
 }

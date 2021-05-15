@@ -6,8 +6,33 @@
  * @param {number[][]} grid
  * @return {number}
  */
- var shortestPathBinaryMatrix = function(grid) {
-  
+var shortestPathBinaryMatrix = function(grid) {
+  const m = grid.length
+  if (grid[0][0] === 1 || grid[m-1][m-1] === 1) return -1
+  const directX = [0, 1, 1, 1, 0, -1, -1, -1]
+  const directY = [1, 1, 0, -1, -1, -1, 0, 1]
+
+  let queue = [[0, 0]], count = 0
+  while (queue.length > 0) {
+    let length = queue.length
+    while (length-- > 0) {
+      const [i, j] = queue.shift()
+      if (i === m - 1 && j === m - 1) {
+        return count + 1
+      }
+      for (let k = 0; k < 8; k++) {
+        const x = i + directX[k]
+        const y = j + directY[k]
+        if (x < 0 || y < 0 || x >= m || y >= m || grid[x][y] === 1) {
+          continue
+        }
+        grid[x][y] = 1
+        queue.push([x, y])
+      }
+    }
+    count++
+  }
+  return -1
 };
 
 // dfs 超时

@@ -1,0 +1,56 @@
+/* 
+  https://leetcode-cn.com/problems/word-search-ii/
+*/
+/**
+ * @param {character[][]} board
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var findWords = function(board, words) {
+  let trie = Object.create(null)
+  for (const word of words) {
+    let _trie = trie
+    for (const w of word) {
+      _trie[w] = _trie[w] || {}
+      _trie = _trie[w]
+    }
+    _trie.word = word
+  }
+  const directX = [0, 1, 0, -1], directY = [1, 0, -1, 0]
+  const m = board.length, n = board[0].length
+  let set = new Set()
+
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (trie[board[i][j]]) {
+        dfs(i, j, trie)
+      }
+    }
+  }
+  return [...set]
+
+  function dfs(i, j, node) {
+    if (i < 0 || j < 0 || i >= m || j >= n || board[i][j] === '.' || !node[board[i][j]]) {
+      return
+    }
+    const temp = board[i][j]
+    node = node[temp]
+    if (node.word) set.add(node.word)
+
+    for (let k = 0; k < 4; k++) {
+      const x = i + directX[k]
+      const y = j + directY[k]
+      board[i][j] = '.'
+      dfs(x, y, node)
+      board[i][j] = temp
+    }
+  }
+}
+
+
+const board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+// const board = [["a"]], words = ["a"]
+// const board = [["a","a"]], words = ["aaa"]
+// const board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain","hklf", "hf"]
+
+console.log(findWords(board, words))
