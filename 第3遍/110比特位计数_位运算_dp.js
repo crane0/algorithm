@@ -7,7 +7,20 @@
  * @return {number[]}
  */
 var countBits = function(num) {
-  
+  let bits = [0]
+  for (let i = 1; i <= num; i++) {
+    bits.push(getNumber(i))
+  }
+  return bits
+
+  function getNumber(i) {
+    let count = 0
+    while (i !== 0) {
+      count += (i & 1)
+      i >>= 1
+    }
+    return count
+  }
 };
 
 /**
@@ -18,7 +31,11 @@ var countBits = function(num) {
  * @return {number[]}
  */
 var countBits = function(num) {
-  
+  let bits = [0]
+  for (let i = 1; i <= num; i++) {
+    bits[i] = bits[i >> 1] + (i & 1)
+  }
+  return bits
 };
 
 /**
@@ -28,7 +45,15 @@ var countBits = function(num) {
  * @return {number[]}
  */
 var countBits = function(num) {
-  
+  let bits = [0]
+  let largest = 0
+  for (let i = 1; i <= num; i++) {
+    if ((i & (i - 1)) === 0) {
+      largest = i
+    }
+    bits[i] = bits[i - largest] + 1
+  }
+  return bits
 };
 
 console.log(countBits(4))
