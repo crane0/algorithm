@@ -4,13 +4,27 @@
  * @return {number[]} 
  */
 var sort = function(nums) {
-
+  return quickSort(nums, 0, nums.length - 1)
   function quickSort(arr, left, right) {
-    
+    if (arr.length <= 1) return arr
+    if (left < right) { // 关键判断！！！
+      const index = partition(arr, left, right)
+      quickSort(arr, left, index - 1)
+      quickSort(arr, index + 1, right)
+    }
+    return arr
   }
 
   function partition(arr, left, right) {
-    
+    let provt = left, index = left + 1
+    for (let i = index; i <= right; i++) {
+      if (arr[i] < arr[provt]) {
+        [arr[i], arr[index]] = [arr[index], arr[i]];
+        index++
+      }
+    }
+    [arr[provt], arr[index - 1]] = [arr[index - 1], arr[provt]];
+    return index - 1
   }
 }
 
@@ -33,9 +47,26 @@ var sort = function(nums) {
   return mergeSort(nums)
 
   function mergeSort(arr) {
-    
+    if (arr.length <= 1) return arr
+    const mid = arr.length >> 1
+    const left = mergeSort(arr.slice(0, mid))
+    const right = mergeSort(arr.slice(mid))
+    return merge(left, right)
   }
 
+  function merge(left, right) {
+    let ret = []
+    while (left.length && right.length) {
+      ret.push(left[0] < right[0] ? left.shift() : right.shift())
+    }
+    while (left.length) {
+      ret.push(left.shift())
+    }
+    while (right.length) {
+      ret.push(right.shift())
+    }
+    return ret
+  }
 }
 
 /**
@@ -47,9 +78,34 @@ var sort = function(nums) {
   return heapSort(nums)
 
   function heapSort(arr) {
-    
+    if (arr.length <= 1) return arr
+    const len = arr.length 
+    for (let i = (len - 1) >> 1; i >= 0; i--) {
+      heapify(arr, i, len)
+    }
+
+    for (let i = len - 1; i >= 0; i--) {
+      [arr[0], arr[i]] = [arr[i], arr[0]]
+      heapify(arr, 0, i)
+    }
+    return arr
   }
 
+  function heapify(arr, i, len) {
+    const left = i * 2 + 1
+    const right = i * 2 + 2
+    let largest = i
+    while (left < len && arr[left] > arr[largest]) {
+      largest = left
+    }
+    while (right < len && arr[right] > arr[largest]) {
+      largest = right
+    }
+    if (i !== largest) {
+      [arr[i], arr[largest]] = [arr[largest], arr[i]]
+      heapify(arr, largest, len)
+    }
+  }
 }
 
 const params = [6, 2, 3, 5, 7, 10, 1, 9, 4]
